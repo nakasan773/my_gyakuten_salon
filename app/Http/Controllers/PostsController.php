@@ -9,7 +9,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         return view('posts.index', ['posts' => $posts]);
     }
     
@@ -17,7 +17,6 @@ class PostsController extends Controller
     {
         return view('posts.create');
     }
-    
     public function store(Request $request)
     {
         $params = $request->validate([
@@ -31,16 +30,16 @@ class PostsController extends Controller
         public function show($post_id)
     {
         $post = Post::findOrfail($post_id);
-        return view('posts.show', ['post' => $post]);    
+        return view('posts.show', ['post' => $post]);
 
     }
 
     public function edit($post_id)
     {
         $post = Post::findOrfail($post_id);
-        return view('posts.edit', ['post' => $post]);    
+        return view('posts.edit', ['post' => $post]);
 
-    }  
+    }
 
     public function update($post_id, Request $request)
     {
