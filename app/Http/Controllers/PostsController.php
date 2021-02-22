@@ -46,7 +46,7 @@ class PostsController extends Controller
         $params = $request->validate([
             'title' => 'required|max:20',
             'body' => 'required|max:140',
-            ]);   
+            ]);
 
         $post = Post::findOrfail($post_id);
         $post->fill($params)->save();
